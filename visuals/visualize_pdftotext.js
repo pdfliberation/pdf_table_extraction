@@ -22,14 +22,25 @@ _.each(d3.selectAll('word')[0],
 
 svg.attr('width',width).attr('height',height);
 
-gs = svg.selectAll('g')
+doc_image = svg.append('g').classed('doc_image',true);
+
+doc_image.append('image')
+    .attr('xlink:href','DHS.TSA.2013.ppm-01.png')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('x',0)
+    .attr('y',0);
+
+bbox_container = svg.append('g').classed('bbox',true);
+
+bboxes = bbox_container.selectAll('g')
       .data(all_words)
       .enter().append('g')
       .attr('transform',function(d){return "translate("+d.xmin+","+d.ymin+")";})
 
-gs.append('rect')
+bboxes.append('rect')
    .attr('height', function(d){ return Math.abs(d.ymax - d.ymin); })
-   .attr('width',  function(d){ return Math.abs(d.xmax - d.ymin); })
+   .attr('width',  function(d){ return Math.abs(d.xmax - d.xmin); })
    .attr('x', 0)
    .attr('y', 0)
    .attr('id', function(d){ return 'rect-'+d.id; })
@@ -41,7 +52,7 @@ gs.append('rect')
    .on('mouseover', function(d) { darken('#rect-'+d.id); })
    .on('mouseout', function(d) { undarken('#rect-'+d.id); });
    
-gs.append('text')
+bboxes.append('text')
    .text(function(d){ return d.text; })
    .attr('dx', '0.1em')
    .attr('dy', '1em');
