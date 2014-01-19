@@ -15,17 +15,21 @@ _.each(d3.selectAll('word')[0],
                             'ymax': parseFloat(w.getAttribute('ymax')),
                             'id': count,
                             'text': w.innerHTML});
-                        width = Math.max(width, w.getAttribute('xmax'));
+                        width = Math.max(width, w.getAttribute('xmax')) ;
                         height = Math.max(height, w.getAttribute('ymax'));
                         count += 1;
                         });
+
+width = d3.select('page').attr('width');
+height = d3.select('page').attr('height');
+
 
 svg.attr('width',width).attr('height',height);
 
 doc_image = svg.append('g').classed('doc_image',true);
 
 doc_image.append('image')
-    .attr('xlink:href','DHS.TSA.2013.ppm-01.png')
+    .attr('xlink:href','DHS.TSA.2013.png-01.png')
     .attr('width', width)
     .attr('height', height)
     .attr('x',0)
@@ -54,8 +58,8 @@ bboxes.append('rect')
    
 bboxes.append('text')
    .text(function(d){ return d.text; })
-   .attr('dx', '0.1em')
-   .attr('dy', '1em');
+   .attr('dx', '0')
+   .attr('dy', '0');
 
 function darken(node_id) {
     d3.select(node_id)

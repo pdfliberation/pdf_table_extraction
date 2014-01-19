@@ -11,7 +11,7 @@ word {
 }
 
 text {
-    font-size:2em;
+    font-size:.5em;
     z-index:99999;
     fill:rgb(75, 87, 90);
     text-align: right;
